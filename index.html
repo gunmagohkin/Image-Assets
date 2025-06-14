@@ -1,151 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base target="_top">
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background-color: #063e56;
-        font-family: 'Segoe UI', sans-serif;
-        overflow: hidden;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base target="_top">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #063e56;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
 
-      .container {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        width: 100%;
-      }
+    .container, .video-container {
+      width: 100%;
+      height: 100vh;
+    }
 
-      .banner img,
-      .middle img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
 
-      .welcome-box {
-        color: white;
-        text-align: center;
-        flex-grow: 1;
-        padding: 2vh 5vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        box-sizing: border-box;
-      }
+.banner img,
+.middle img {
+  width: 100%;
+  height: 21vh; /* Smaller banner height */
+  object-fit: cover; /* Crop image if needed to fill the space */
+  display: block;
+}
 
-      .welcome-box h1 {
-        font-size: 8vw;
-        font-weight: bold;
-        margin: 0.5em 0 0.3em;
-      }
 
-      .visitor h2 {
-        font-size: 6vw;
-        margin: 0.2em 0;
-      }
+    .welcome-box {
+      color: white;
+      text-align: center;
+      flex-grow: 1;
+      padding: 1vh 2vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+    }
 
-      .visitor p {
-        font-size: 4vw;
-        font-style: italic;
-        margin: 0.2em 0 0.5em;
-      }
+    .welcome-box h1 {
+      font-size: 14vw;
+      font-weight: 900;
+      margin:  0 0.3em;
+      font-family: 'League Spartan', sans-serif;
+      animation: fadeZoomIn 1s ease-out;
+    }
 
-      .and {
-        font-size: 4vw;
-        margin: 1em 0;
-        font-weight: bold;
-      }
+    .visitor h2 {
+      font-size: 9vw;
+      margin: 0.1em 0;
+      font-family: 'Times New Roman', Times, serif;
+      animation: slideFadeIn 1s ease-out forwards;
+      opacity: 0;
+    }
 
-      .date {
-        font-size: 3vw;
-        margin-top: 2vh;
-      }
+    .visitor p {
+      font-size: 6vw;
+      font-style: italic;
+      margin: 0.1em 0 0.5em;
+      color: #71baf6;
+      font-family: 'Times New Roman', Times, serif;
+      animation: slideFadeIn 1s ease-out forwards;
+      opacity: 0;
+    }
 
-      .footer {
-        font-size: 2.5vw;
-        color: #b0d0e0;
-        margin-top: 2vh;
-        line-height: 1.4em;
-      }
+    #v2, #c2 {
+      animation-delay: 0.5s;
+    }
 
-      @media (min-width: 768px) {
-        .welcome-box h1 {
-          font-size: 5em;
-        }
+    .and {
+      font-size: 7vw;
+      margin: 0;
+      font-weight: bold;
+      font-family: 'Times New Roman', Times, serif;
+    }
 
-        .visitor h2 {
-          font-size: 3em;
-        }
+    .date {
+      font-size: 4vw;
+      margin-top: .5vh;
+      font-family: 'Archivo Narrow', sans-serif;
+    }
 
-        .visitor p {
-          font-size: 1.3em;
-        }
+    .footer {
+      font-size: 3vw;
+      color: #ffffff;
+      margin-top: 1vh;
+      line-height: 1.4em;
+    }
 
-        .and {
-          font-size: 1.8em;
-        }
+    .video-container {
+      display: none;
+      background-color: black;
+    }
 
-        .date {
-          font-size: 1.2em;
-        }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .footer {
-          font-size: 1em;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="banner">
-        <img src="https://gunmagohkin.github.io/Welcoming-Message/header.jpg" alt="Header">
+    @media (min-width: 768px) {
+      .welcome-box h1 { font-size: 5em; }
+      .visitor h2 { font-size: 3em; }
+      .visitor p { font-size: 1.3em; }
+      .and { font-size: 1.8em; }
+      .date { font-size: 1.2em; }
+      .footer { font-size: 1em; }
+    }
+
+    @keyframes fadeZoomIn {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideFadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Welcome Screen -->
+  <div id="welcome-screen" class="container">
+    <div class="banner">
+      <img src="https://gunmagohkin.github.io/Welcoming-Message/header.jpg" alt="Header">
+    </div>
+    <div class="middle">
+      <img src="https://gunmagohkin.github.io/Welcoming-Message/gate.png" alt="Gate">
+    </div>
+    <div class="welcome-box">
+      <h1>WELCOME!</h1>
+      <div class="visitor">
+        <h2 id="v1">Visitor 1</h2>
+        <p id="c1">Company Name 1</p>
       </div>
-      <div class="middle">
-        <img src="https://gunmagohkin.github.io/Welcoming-Message/gate.png" alt="Gate">
+      <div class="and">and</div>
+      <div class="visitor">
+        <h2 id="v2">Visitor 2</h2>
+        <p id="c2">Company Name 2</p>
       </div>
-      <div class="welcome-box">
-        <h1>WELCOME!</h1>
-        <div class="visitor">
-          <h2 id="v1">Visitor 1</h2>
-          <p id="c1">Company Name 1</p>
-        </div>
-        <div class="and">and</div>
-        <div class="visitor">
-          <h2 id="v2">Visitor 2</h2>
-          <p id="c2">Company Name 2</p>
-        </div>
-        <div class="date" id="date">Date Here</div>
-        <div class="footer">
-          --------------------------------------------------------------------------------------------- <br />
-          "Striving to achieve 100 Years of Excellent Service<br />
-          and maintain being the PREFERRED SUPPLIER of customers."
-        </div>
+      <div class="date" id="date">Date Here</div>
+      <div class="footer">
+        ------------------------------------------------------------------- <br />
+        "Striving to achieve 100 Years of Excellent Service<br />
+        and maintain being the PREFERRED SUPPLIER of customers."
       </div>
     </div>
+  </div>
 
-    <script>
-      async function fetchData() {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbynDMQ09AQP_53dJfqp158KwQlbkvHf6eauz0aulvb60TF-mZy6DTAsm94NOW0N9E0B/exec');
-        const data = await response.json();
-        updateUI(data);
+  <!-- Video Screen -->
+  <div id="video-screen" class="video-container">
+    <video id="welcome-video" autoplay muted>
+      <source src="https://gunmagohkin.github.io/Welcoming-Message/promote%20video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <script>
+    async function fetchData() {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbynDMQ09AQP_53dJfqp158KwQlbkvHf6eauz0aulvb60TF-mZy6DTAsm94NOW0N9E0B/exec');
+      const data = await response.json();
+      updateUI(data);
+    }
+
+    function updateUI(data) {
+      document.getElementById('v1').textContent = data.visitor1;
+      document.getElementById('c1').textContent = data.company1;
+      document.getElementById('v2').textContent = data.visitor2 || '';
+      document.getElementById('c2').textContent = data.company2 || '';
+      document.getElementById('date').textContent = data.date;
+
+      const andElement = document.querySelector('.and');
+      if (data.visitor2?.trim()) {
+        andElement.style.display = 'block';
+      } else {
+        andElement.style.display = 'none';
       }
+    }
 
-      function updateUI(data) {
-        document.getElementById('v1').textContent = data.visitor1;
-        document.getElementById('c1').textContent = data.company1;
-        document.getElementById('v2').textContent = data.visitor2;
-        document.getElementById('c2').textContent = data.company2;
-        document.getElementById('date').textContent = data.date;
-      }
+    function switchToVideo() {
+      document.getElementById('welcome-screen').style.display = 'none';
+      document.getElementById('video-screen').style.display = 'block';
+      document.getElementById('welcome-video').play();
+    }
 
-      fetchData();
-      setInterval(fetchData, 30000);
-    </script>
-  </body>
+    function switchToWelcome() {
+      document.getElementById('video-screen').style.display = 'none';
+      document.getElementById('welcome-screen').style.display = 'flex';
+      fetchData(); // Refresh data again when returning
+    }
+
+    // Initial fetch and start loop
+    fetchData();
+
+    setInterval(fetchData, 10000);
+
+    // Show video after 15 seconds
+    setTimeout(() => {
+      switchToVideo();
+    }, 15000);
+
+    // When video ends, return to welcome screen and repeat
+    document.getElementById('welcome-video').addEventListener('ended', () => {
+      switchToWelcome();
+
+      // Repeat cycle after video ends
+      setTimeout(() => {
+        switchToVideo();
+      }, 15000); // 15 seconds again before playing next video
+    });
+  </script>
+</body>
 </html>
